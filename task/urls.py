@@ -3,5 +3,6 @@ from . import views
 
 urlpatterns = [
     path('tasks/', views.task_list),
-    # path('tasks/due/<str:due_date>', views.task_list_by_due_date)
+    path('tasks/<int:id>', views.task_detail),
+    path('categories/', views.category_list)
 ]

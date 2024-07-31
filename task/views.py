@@ -2,11 +2,10 @@ from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, DestroyModelMixin, ListModelMixin
 from rest_framework.pagination import PageNumberPagination
 from .models import Task, Category, Note
-from .serializers import TaskSerializer, CategorySerilizer, NoteSerializer
+from .serializers import TaskSerializer, AddTaskSerializer, UpdateStageSerializer, CategorySerilizer, NoteSerializer
 
 
 class TaskViewSet(ModelViewSet):
-    serializer_class = TaskSerializer
     pagination_class = PageNumberPagination
 
     def get_queryset(self):
@@ -18,6 +17,13 @@ class TaskViewSet(ModelViewSet):
         elif completion_date is not None:
             queryset = queryset.filter(completion_date=completion_date)
         return queryset
+    
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return AddTaskSerializer
+        elif self.request.method == 'PATCH':
+            return UpdateStageSerializer
+        return TaskSerializer
 
 
 class CategoryViewSet(ModelViewSet):

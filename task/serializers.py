@@ -3,11 +3,27 @@ from .models import Task, Category, Note
 
 
 class TaskSerializer(serializers.ModelSerializer):
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+    
     class Meta:
         model = Task
-        fields = ['title', 'description', 'stage', 'category', 'created_at', 'completion_date']
+        fields = ['id', 'title', 'description', 'stage', 'category', 'created_at', 'completion_date']
 
     category = serializers.StringRelatedField()
+
+
+class AddTaskSerializer(serializers.ModelSerializer):
+    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+    
+    class Meta:
+        model = Task
+        fields = ['title', 'description', 'category', 'completion_date']
+
+
+class UpdateStageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ['stage']
 
 
 class CategorySerilizer(serializers.ModelSerializer):

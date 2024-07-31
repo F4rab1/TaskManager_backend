@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
-    'task',
     'rest_framework',
+    'task',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'PAGE_SIZE': 15
 }
+
+AUTH_USER_MODEL = 'core.User'

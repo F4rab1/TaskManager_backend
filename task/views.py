@@ -1,12 +1,16 @@
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, DestroyModelMixin, ListModelMixin
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.filters import OrderingFilter, SearchFilter
 from .models import Task, Category, Note
 from .serializers import TaskSerializer, AddTaskSerializer, UpdateStageSerializer, CategorySerilizer, NoteSerializer
 
 
 class TaskViewSet(ModelViewSet):
     pagination_class = PageNumberPagination
+    filter_backends = [OrderingFilter, SearchFilter]
+    ordering_fields = ['stage', 'created_at']
+    search_fields = ['title', 'description']
 
     def get_queryset(self):
         queryset = Task.objects.select_related('category').all()

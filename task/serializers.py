@@ -23,7 +23,7 @@ class AddTaskSerializer(serializers.ModelSerializer):
 class UpdateStageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['stage']
+        fields = ['stage']  
 
 
 class CategorySerilizer(serializers.ModelSerializer):

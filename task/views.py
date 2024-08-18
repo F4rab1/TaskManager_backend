@@ -38,6 +38,8 @@ class CategoryViewSet(ModelViewSet):
 class NoteViewSet(CreateModelMixin, UpdateModelMixin, DestroyModelMixin, ListModelMixin, GenericViewSet):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+    filter_backends = [SearchFilter]
+    search_fields = ['title', 'text']
 
 
 # @api_view(['GET'])

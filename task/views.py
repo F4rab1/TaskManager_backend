@@ -1,9 +1,9 @@
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
-from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, DestroyModelMixin, ListModelMixin
+from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, DestroyModelMixin, ListModelMixin, RetrieveModelMixin
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import OrderingFilter, SearchFilter
-from .models import Task, Category, Note
-from .serializers import TaskSerializer, AddTaskSerializer, UpdateStageSerializer, CategorySerilizer, NoteSerializer
+from .models import Task, Category, Note, Customer
+from .serializers import TaskSerializer, AddTaskSerializer, UpdateStageSerializer, CategorySerilizer, NoteSerializer, CustomerSerializer
 
 
 class TaskViewSet(ModelViewSet):
@@ -42,9 +42,9 @@ class NoteViewSet(CreateModelMixin, UpdateModelMixin, DestroyModelMixin, ListMod
     search_fields = ['title', 'text']
 
 
-# @api_view(['GET'])
-# def task_list_by_due_date(request, due_date):
-#     due_date_obj = datetime.strptime(due_date, '%Y-%m-%d')
-#     query_set = Task.objects.filter(due_to__date=due_date_obj.date())
-#     serializer = TaskSerializer(query_set, many=True)
-#     return Response(serializer.data)
+class CustomerViewSet(CreateModelMixin,
+                      RetrieveModelMixin,
+                      UpdateModelMixin,
+                      GenericViewSet):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer

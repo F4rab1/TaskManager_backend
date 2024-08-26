@@ -14,6 +14,7 @@ class TaskViewSet(ModelViewSet):
     filter_backends = [OrderingFilter, SearchFilter]
     ordering_fields = ['stage', 'created_at']
     search_fields = ['title', 'description']
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         queryset = Task.objects.select_related('category').all()
@@ -36,6 +37,7 @@ class TaskViewSet(ModelViewSet):
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerilizer
+    permission_classes = [IsAuthenticated]
 
 
 class NoteViewSet(CreateModelMixin, UpdateModelMixin, DestroyModelMixin, ListModelMixin, GenericViewSet):
@@ -43,6 +45,7 @@ class NoteViewSet(CreateModelMixin, UpdateModelMixin, DestroyModelMixin, ListMod
     serializer_class = NoteSerializer
     filter_backends = [SearchFilter]
     search_fields = ['title', 'text']
+    permission_classes = [IsAuthenticated]
 
 
 class CustomerViewSet(CreateModelMixin,

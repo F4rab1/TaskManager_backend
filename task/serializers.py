@@ -8,7 +8,7 @@ class TaskSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Task
-        fields = ['id', 'title', 'description', 'stage', 'category', 'created_at', 'completion_date']
+        fields = ['id', 'title', 'description', 'stage', 'priority', 'category', 'created_at', 'completion_date']
 
     category = serializers.StringRelatedField()
 
@@ -18,7 +18,7 @@ class AddTaskSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Task
-        fields = ['title', 'description', 'category', 'completion_date']
+        fields = ['title', 'description', 'priority', 'category', 'completion_date']
 
     def validate_completion_date(self, value):
         if value < date.today():

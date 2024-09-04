@@ -84,7 +84,7 @@ class CustomerViewSet(CreateModelMixin,
             serializer = CustomerSerializer(customer)
             return Response(serializer.data)
         elif request.method == 'PUT':
-            serializer = CustomerSerializer(customer, data=request.data)
+            serializer = CustomerSerializer(customer, data=request.data, context={'request': request})
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data)

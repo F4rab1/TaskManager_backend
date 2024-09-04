@@ -27,4 +27,12 @@ I am also developing an iOS application to connect with this backend API. You ca
 
 <img width="1280" alt="Screenshot 2024-08-08 at 23 03 28" src="https://github.com/user-attachments/assets/e7850097-715c-41f3-9e24-5d7e0870e9ff">
 
+**-Token:** 
+
+<img width="1280" alt="Screenshot 2024-09-03 at 23 04 12" src="https://github.com/user-attachments/assets/45b3bcb4-6b92-4cee-9609-f4a450bf3566">
+
+**-Customers Profile:**
+
+<img width="1280" alt="Screenshot 2024-09-04 at 20 17 35" src="https://github.com/user-attachments/assets/d0b91fcb-c7d8-4bc5-a441-52e2a1dcd591">
+
 

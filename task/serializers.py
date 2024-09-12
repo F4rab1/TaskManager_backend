@@ -19,10 +19,10 @@ class AddTaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = ['title', 'description', 'priority', 'category', 'completion_date', 'isFlagged']
 
-    def validate_completion_date(self, value):
-        if value < date.today():
+    def validate_completion_date(self, completion_date):
+        if completion_date < date.today():
             raise serializers.ValidationError("The completion date cannot be in the past.")
-        return value
+        return completion_date
 
 
 class UpdateStageSerializer(serializers.ModelSerializer):

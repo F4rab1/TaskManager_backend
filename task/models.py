@@ -58,3 +58,8 @@ class Note(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+
+class NoteImage(models.Model):
+    note = models.ForeignKey(Note, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='note/images/')

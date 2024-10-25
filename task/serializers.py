@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Task, Category, Note, Customer
+from .models import Task, Category, Note, Customer, NoteImage
 from datetime import date
 
 
@@ -37,10 +37,22 @@ class CategorySerilizer(serializers.ModelSerializer):
         fields = ['id', 'title']
 
 
+class NoteImageSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        note_id = self.context['note_id']
+        return NoteImage.objects.create(note_id=note_id, **validated_data)
+
+    class Meta:
+        model = NoteImage
+        fields = ['id', 'image']
+
+
 class NoteSerializer(serializers.ModelSerializer):
+    images = NoteImageSerializer(many=True, read_only=True)
+
     class Meta:
         model = Note
-        fields = ['title', 'text', 'created_at']
+        fields = ['id', 'title', 'text', 'created_at', 'images']
 
 
 class CustomerSerializer(serializers.ModelSerializer):

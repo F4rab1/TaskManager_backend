@@ -5,8 +5,9 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import OrderingFilter, SearchFilter
-from .models import Task, Category, Note, Customer
-from .serializers import TaskSerializer, AddTaskSerializer, UpdateStageSerializer, CategorySerilizer, NoteSerializer, CustomerSerializer
+from .models import Task, Category, Note, Customer, NoteImage
+from .serializers import TaskSerializer, AddTaskSerializer, UpdateStageSerializer, CategorySerilizer, NoteSerializer, \
+    CustomerSerializer, NoteImageSerializer
 
 
 class TaskViewSet(ModelViewSet):
@@ -57,12 +58,22 @@ class CategoryViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 
-class NoteViewSet(CreateModelMixin, UpdateModelMixin, DestroyModelMixin, ListModelMixin, GenericViewSet):
-    queryset = Note.objects.all()
+class NoteViewSet(ModelViewSet):
+    queryset = Note.objects.prefetch_related('images').all()
     serializer_class = NoteSerializer
     filter_backends = [SearchFilter]
     search_fields = ['title', 'text']
     permission_classes = [IsAuthenticated]
+
+
+class NoteImageViewSet(ModelViewSet):
+    serializer_class = NoteImageSerializer
+
+    def get_serializer_context(self):
+        return {'note_id': self.kwargs['note_pk']}
+
+    def get_queryset(self):
+        return NoteImage.objects.filter(note_id=self.kwargs.get('note_pk'))
 
 
 class CustomerViewSet(CreateModelMixin,

@@ -11,7 +11,6 @@ from .serializers import TaskSerializer, AddTaskSerializer, UpdateStageSerialize
 
 
 class TaskViewSet(ModelViewSet):
-    pagination_class = PageNumberPagination
     filter_backends = [OrderingFilter, SearchFilter]
     ordering_fields = ['stage', 'created_at']
     search_fields = ['title', 'description']

@@ -44,7 +44,7 @@ class NoteImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NoteImage
-        fields = ['id', 'image']
+        fields = ['id', 'image_link']
 
 
 class NoteSerializer(serializers.ModelSerializer):

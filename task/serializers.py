@@ -4,8 +4,6 @@ from datetime import date
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
-    
     class Meta:
         model = Task
         fields = ['id', 'title', 'description', 'stage', 'priority', 'category', 'created_at', 'completion_date', 'customer', 'isFlagged']
